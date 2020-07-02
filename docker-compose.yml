@@ -1,0 +1,29 @@
+version: '3'
+services:
+  php:
+    build: .
+    stdin_open: true
+    tty: true
+    # need this for dev environments and proper debugging
+    volumes:
+      - .:/usr/src/myapp:cached
+    env_file:
+      - local.env
+    ports:
+      - "8080-8080"
+    networks:
+      vpcbr:
+        ipv4_address: 10.11.0.2
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.11.0.0/16
+
+
+
+
+
+
