@@ -35,7 +35,8 @@ JetBrains now encourages by setting up pre-configured .gitignore file.
 ## TDD
 
 TDD is pretty standard now with well documented benefits and my first task will be to configure PHPUnit. I have read 
-that Pest may be a better option. But for now, PHPUnit may be the easier option since it is more popular.
+that Pest may be a better option. But for now, PHPUnit may be the easier option since it is more popular. Unit test
+run config works inside PHPStorm.
 
 
 
