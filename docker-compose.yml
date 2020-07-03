@@ -1,12 +1,14 @@
-version: '3'
+version: '3.2'
 services:
   php:
+    # need this for dev environments and proper debugging
+    volumes:
+      - type: bind
+        source: .
+        target: /app
     build: .
     stdin_open: true
     tty: true
-    # need this for dev environments and proper debugging
-    volumes:
-      - .:/app:cached
     env_file:
       - local.env
     ports:
