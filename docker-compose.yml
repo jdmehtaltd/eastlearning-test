@@ -6,7 +6,7 @@ services:
     tty: true
     # need this for dev environments and proper debugging
     volumes:
-      - .:/usr/src/myapp:cached
+      - .:/app:cached
     env_file:
       - local.env
     ports:
