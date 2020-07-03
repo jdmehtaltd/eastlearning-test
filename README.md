@@ -38,6 +38,12 @@ TDD is pretty standard now with well documented benefits and my first task will 
 that Pest may be a better option. But for now, PHPUnit may be the easier option since it is more popular. Unit test
 run config works inside PHPStorm.
 
+## The PHP file upload
+
+A simple google of 'PHP file upload' yields these links. It is almost too easy to do things in PHP in an unstructured
+way and that can be a double edged sword. https://www.w3schools.com/php/php_file_upload.asp, 
+https://www.php.net/manual/en/features.file-upload.php.
+
 
 
 
