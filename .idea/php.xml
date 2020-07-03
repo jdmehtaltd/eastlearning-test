@@ -14,4 +14,9 @@
     </interpreters>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <phpunit_by_interpreter interpreter_id="1651554e-014d-454d-aa68-76e78e662fa4" custom_loader_path="/vendor/autoload.php" phpunit_phar_path="" />
+    </phpunit_settings>
+  </component>
 </project>
