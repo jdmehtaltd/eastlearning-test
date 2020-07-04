@@ -47,7 +47,7 @@ https://www.php.net/manual/en/features.file-upload.php.
 ## Simplifications, Assumptions, Compromises
 1. There are a few TODO comments in the code. Although that is considered bad practice, it is helpful sometimes to just
 move on without looking up the full idiomatic style.
-2. Only gif and jpg files are accepted as image files but that is easily extensible in the Validator class.
+2. gif, jpg (jpeg), png files are accepted as image files but that is easily extensible in the Validator class.
 
 
 

@@ -11,8 +11,10 @@ class ValidatorTest extends TestCase
         {
             Validator::checkIfImage('abc.jpg');
             Validator::checkIfImage('abc.gif');
+            Validator::checkIfImage('abc.jpeg');
+            Validator::checkIfImage('abc.png');
         }
-        catch(NotAllowedImageFormatException $nie)
+        catch(NotAllowedImageFormatException $ex)
         {
             # TODO: simulating test failure, look for something like fail() method
             $this->assertTrue(null);
@@ -21,9 +23,9 @@ class ValidatorTest extends TestCase
         {
             Validator::checkIfImage('abc.pdf');
         }
-        catch (Exception $possible_nie)
+        catch (Exception $possibleNotAllowedFormatEx)
         {
-           $this->assertInstanceOf(NotAllowedImageFormatException::class, $possible_nie);
+           $this->assertInstanceOf(NotAllowedImageFormatException::class, $possibleNotAllowedFormatEx);
         }
     }
 }
