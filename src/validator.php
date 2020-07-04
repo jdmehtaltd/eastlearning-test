@@ -10,7 +10,7 @@ class Validator {
         4 => 'jpeg',
     );
 
-    public static function checkIfImage(string $filename): void
+    public static function checkIfValidImageFormat(string $filename): void
     {
         $split_filename = explode('.', $filename);
         $extension = end($split_filename);

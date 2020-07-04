@@ -5,14 +5,14 @@ use PHPUnit\Framework\TestCase;
 
 class ValidatorTest extends TestCase
 {
-    public function testCheckIfImage(): void
+    public function testCheckIfValidImageFormat(): void
     {
         try
         {
-            Validator::checkIfImage('abc.jpg');
-            Validator::checkIfImage('abc.gif');
-            Validator::checkIfImage('abc.jpeg');
-            Validator::checkIfImage('abc.png');
+            Validator::checkIfValidImageFormat('abc.jpg');
+            Validator::checkIfValidImageFormat('abc.gif');
+            Validator::checkIfValidImageFormat('abc.jpeg');
+            Validator::checkIfValidImageFormat('abc.png');
         }
         catch(NotAllowedImageFormatException $ex)
         {
@@ -21,7 +21,7 @@ class ValidatorTest extends TestCase
         }
         try
         {
-            Validator::checkIfImage('abc.pdf');
+            Validator::checkIfValidImageFormat('abc.pdf');
         }
         catch (Exception $possibleNotAllowedFormatEx)
         {

@@ -29,7 +29,7 @@ if ($_FILES["fileToUpload"]["size"] > 5000000) {
 }
 
 try {
-    Validator::checkIfImage($target_file);
+    Validator::checkIfValidImageFormat($target_file);
 }
 catch (NotAllowedImageFormatException $ex) {
     echo $ex->getMessage();
