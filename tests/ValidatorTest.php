@@ -23,18 +23,19 @@ class ValidatorTest extends TestCase
         {
             Validator::checkIfValidImageFormat('abc.pdf');
         }
-        catch (Exception $possibleNotAllowedFormatEx)
+        catch (Exception $ex)
         {
-           $this->assertInstanceOf(NotAllowedImageFormatException::class, $possibleNotAllowedFormatEx);
+           $this->assertInstanceOf(NotAllowedImageFormatException::class, $ex);
         }
     }
 
-    public function testCheckMaxSize(): void {
+    public function testCheckMaxSize(): void
+    {
         try
         {
             Validator::checkMaxSize(1); // 1 byte
         }
-        catch(MaxFileSizeExceeded $ex)
+        catch(MaxFileSizeExceededException $ex)
         {
             # TODO: simulating test failure, look for something like fail() method
             $this->assertTrue(null);
@@ -43,8 +44,31 @@ class ValidatorTest extends TestCase
         {
             Validator::checkMaxSize(1000000000); // 1GB
         }
-        catch(Exception $possibleMaxFileSizeExceeded) {
-            $this->assertInstanceOf(MaxFileSizeExceeded::class, $possibleMaxFileSizeExceeded);
+        catch(Exception $ex) {
+            $this->assertInstanceOf(MaxFileSizeExceededException::class, $ex);
+        }
+    }
+
+    public function testCheckIfRealImage(): void
+    {
+        try
+        {
+            Validator::checkIfRealImage('/app/tests/JPEG_compression_Example.jpg', 'image/jpeg');
+            Validator::checkIfRealImage('/app/tests/Lomo-lca_sample_png.png', 'image/png');
+            Validator::checkIfRealImage('/app/tests/tenor_gif.gif', 'image/gif');
+        }
+        catch(NotRealImageException $ex)
+        {
+            # TODO: simulating test failure, look for something like fail() method
+            $this->assertTrue(null);
+            return;
+        }
+        try {
+            Validator::checkIfRealImage('/app/tests/dummy.pdf', 'application/pdf');
+        }
+        catch(Exception $ex)
+        {
+            $this->assertInstanceOf(NotRealImageException::class, $ex);
         }
     }
 }
