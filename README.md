@@ -36,7 +36,8 @@ JetBrains now encourages by setting up pre-configured .gitignore file.
 
 TDD is pretty standard now with well documented benefits and my first task will be to configure PHPUnit. I have read 
 that Pest may be a better option. But for now, PHPUnit may be the easier option since it is more popular. Unit test
-run config works inside PHPStorm.
+run config works inside PHPStorm. For command line, try this to run the tests inside container from outside: 
+`docker-compose exec php /vendor/phpunit/phpunit/phpunit /app/tests`
 
 ## The PHP file upload
 
