@@ -12,13 +12,12 @@ class Validator {
 
     public static function checkIfValidImageFormat(string $filename): void
     {
-        $split_filename = explode('.', $filename);
-        $extension = end($split_filename);
+        $extension = strtolower(pathinfo($filename,PATHINFO_EXTENSION));
         if (!$extension){
             throw new NotAllowedImageFormatException('Filename has no extension, so cannot determine image format');
         }
         elseif (!in_array($extension, Validator::$validImageFormats)){
-            throw new NotAllowedImageFormatException('$extension is not a supported format');
+            throw new NotAllowedImageFormatException("$extension is not a supported format");
         }
         else{
             return;
