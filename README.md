@@ -44,10 +44,14 @@ A simple google of 'PHP file upload' yields these links. I will study their code
 https://www.w3schools.com/php/php_file_upload.asp, 
 https://www.php.net/manual/en/features.file-upload.php.
 
+## Coding Style Guide
+
+I googled and found the PSR-2 style guide and will adapt the code to fit it: https://www.php-fig.org/psr/psr-2/
+
 ## Simplifications, Assumptions, Compromises
 1. There are a few TODO comments in the code. Although that is considered bad practice, it is helpful sometimes to just
 move on without looking up the full idiomatic style.
-2. gif, jpg (jpeg), png files are accepted as image files but that is easily extensible in the Validator class.
+2. Accepting only gif, jpg (jpeg), png files as image files but that is easily extensible in the Validator class.
 
 
 
