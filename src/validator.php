@@ -1,11 +1,13 @@
 <?php declare(strict_types=1);
 
-class NotImageException extends Exception {}
+class NotAllowedImageFormatException extends Exception {}
 
 class Validator {
-    static array $validStringExtensions = array(
+    static array $validImageFormats = array(
         1 => 'jpg',
-        2 => 'gif'
+        2 => 'gif',
+        3 => 'png',
+        4 => 'jpeg',
     );
 
     public static function checkIfImage(string $filename): void
@@ -13,10 +15,10 @@ class Validator {
         $split_filename = explode('.', $filename);
         $extension = end($split_filename);
         if (!$extension){
-            throw new NotImageException('Filename has no extension');
+            throw new NotAllowedImageFormatException('Filename has no extension, so cannot determine image format');
         }
-        elseif (!in_array($extension, Validator::$validStringExtensions)){
-            throw new NotImageException('$extension is not a valid image extension');
+        elseif (!in_array($extension, Validator::$validImageFormats)){
+            throw new NotAllowedImageFormatException('$extension is not a supported format');
         }
         else{
             return;
