@@ -40,9 +40,15 @@ run config works inside PHPStorm.
 
 ## The PHP file upload
 
-A simple google of 'PHP file upload' yields these links. It is almost too easy to do things in PHP in an unstructured
-way and that can be a double edged sword. https://www.w3schools.com/php/php_file_upload.asp, 
+A simple google of 'PHP file upload' yields these links. I will study their code and possibly refactor and enhance it.
+https://www.w3schools.com/php/php_file_upload.asp, 
 https://www.php.net/manual/en/features.file-upload.php.
+
+## Simplifications, Assumptions, Compromises
+1. There are a few TODO comments in the code. Although that is considered bad practice, it is helpful sometimes to just
+move on without looking up the full idiomatic style.
+2. Only gif and jpg files are accepted as image files but that is easily extensible in the Validator class.
+
 
 
 
