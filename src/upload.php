@@ -1,44 +1,49 @@
 <?php
-require('validator.php');
+require('Validator.php');
 
 $target_dir = "../uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
+$pure_filename = basename($_FILES["fileToUpload"]["name"]);
+$file_size = $_FILES["fileToUpload"]["size"];
+$target_file = $target_dir . $pure_filename;
+$upload_ok = 1;
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
+        $upload_ok = 1;
     } else {
         echo "File is not an image.";
-        $uploadOk = 0;
+        $upload_ok = 0;
     }
 }
 
 // Check if file already exists
 if (file_exists($target_file)) {
     echo "Sorry, file already exists.";
-    $uploadOk = 0;
+    $upload_ok = 0;
 }
 
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 5000000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
+try{
+    Validator::checkMaxSize($file_size);
+}
+catch(MaxFileSizeExceeded $ex)
+{
+    echo $ex->getMessage();
+    $upload_ok = 0;
 }
 
 try {
-    Validator::checkIfValidImageFormat($target_file);
+    Validator::checkIfValidImageFormat($pure_filename);
 }
 catch (NotAllowedImageFormatException $ex) {
     echo $ex->getMessage();
-    $uploadOk = 0;
+    $upload_ok = 0;
 }
 
 // Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
+if ($upload_ok == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
