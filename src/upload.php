@@ -8,12 +8,12 @@ $tmp_filename = $_FILES["fileToUpload"]["tmp_name"];
 $size = $_FILES["fileToUpload"]["size"];
 $mime_type_from_browser = $_FILES["fileToUpload"]["type"];
 $target_filename = $target_dir . $base_filename;
-$upload_ok = 1;
+$upload_ok = true;
 
 // from the documentation here: https://www.php.net/manual/en/features.file-upload.post-method.php
 if ($size == 0){
     echo 'No file was uploaded';
-    $upload_ok = 0;
+    $upload_ok = false;
 }
 
 // Check if image file is a actual image or fake image
@@ -25,7 +25,7 @@ if(isset($_POST["submit"]))
     }
     catch (NotRealImageException $ex) {
         echo $ex->getMessage();
-        $upload_ok = 0;
+        $upload_ok = false;
     }
 }
 
@@ -35,7 +35,7 @@ try{
 catch(MaxFileSizeExceededException $ex)
 {
     echo $ex->getMessage();
-    $upload_ok = 0;
+    $upload_ok = false;
 }
 
 try {
@@ -43,11 +43,11 @@ try {
 }
 catch (NotAllowedImageFormatException $ex) {
     echo $ex->getMessage();
-    $upload_ok = 0;
+    $upload_ok = false;
 }
 
 // Check if $uploadOk is set to 0 by an error
-if ($upload_ok == 0) {
+if ($upload_ok) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
