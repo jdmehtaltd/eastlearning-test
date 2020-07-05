@@ -7,14 +7,14 @@ class MaxFileSizeExceededException extends Exception {}
 class NotRealImageException extends Exception {}
 
 class Validator {
-    static array $validImageFormats = array(
+    public static array $validImageFormats = array(
         1 => 'jpg',
         2 => 'gif',
         3 => 'png',
         4 => 'jpeg',
     );
 
-    static int $maxSize = 200000; // 2MB
+    public static int $maxSize = 200000; // 2MB
 
     public static function checkIfValidImageFormat(string $filename): void
     {
@@ -57,14 +57,8 @@ class Validator {
         {
             throw new NotRealImageException("Mime type from browser, $mimeTypeFromBrowser, not the same as extracted mime type, $extracted_mime_type");
         }
-        $check = getimagesize($tmpFile);
-        if($check !== false)
-        {
-            return;
-        }
-        else
-        {
-            throw new NotRealImageException("$tmpFile is not a real image file");
+        if (strpos($extracted_mime_type, 'image') === false) {
+            throw new NotRealImageException("Mime type extracted for $tmpFile is not an image mime type");
         }
     }
 }

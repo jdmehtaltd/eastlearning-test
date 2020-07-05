@@ -64,7 +64,7 @@ class ValidatorTest extends TestCase
             return;
         }
         try {
-            Validator::checkIfRealImage('/app/tests/dummy.pdf', 'application/pdf');
+            Validator::checkIfRealImage('/app/tests/txtfile.txt', 'text/plain');
         }
         catch(Exception $ex)
         {
