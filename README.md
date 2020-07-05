@@ -51,7 +51,7 @@ I googled and found the PSR-2 style guide and will adapt the code to fit it: htt
 
 ## Simplifications, Assumptions, Compromises
 1. There are a few TODO comments in the code. Although that is considered bad practice, it is helpful sometimes to just
-move on without looking up the full idiomatic style.
+move on without looking up the full idiomatic style, especially in experimental projects.
 2. Accepting only gif, jpg (jpeg), png files as image files but that is easily extensible in the Validator class.
 3. During resizing, I preserve the aspect ratio. If width >= height, that is simple, but I calculate a suitable width
 otherwise based on the aspect ratio.
@@ -65,7 +65,10 @@ works only for jpeg files.
 pixel width or height to see edge behaviour. I have kept that limit configurable within the Processor class so that
 lends some more complexity to which test cases may be valid. For the tests, to be repeatable, there needs to be a rename
 file mode, otherwise the original files are modified.
-
+7. Assuming that authentication and authorization of users is out of scope for this test. 
+8. The persistent URL for sharing is printed upon upload in this very simple journey flow.
+9. An image file is provided in tests/ which is larger than 2MB for testing the upload rejection of large files
+through the web page.
 
 
 
