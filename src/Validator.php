@@ -33,11 +33,11 @@ class Validator {
         }
     }
 
-    public static function checkMaxSize(int $fileSize): void
+    public static function checkMaxSize(int $fileSizeFromBrowser): void
     {
-        if ($fileSize > Validator::$maxSize)
+        if ($fileSizeFromBrowser > Validator::$maxSize)
         {
-            throw new MaxFileSizeExceededException("$fileSize exceeds the maximum size allowed, " . Validator::$maxSize);
+            throw new MaxFileSizeExceededException("$fileSizeFromBrowser exceeds the maximum size allowed, " . Validator::$maxSize);
         }
         else
         {
