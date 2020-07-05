@@ -1,6 +1,12 @@
 FROM php:7.4-cli
 ENV COMPOSER_VENDOR_DIR /vendor
 RUN apt-get update && apt-get install -y wget lynx zip vim
+RUN apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
 RUN pecl install xdebug-2.9.6 && docker-php-ext-enable xdebug
 COPY . /app
 WORKDIR /app

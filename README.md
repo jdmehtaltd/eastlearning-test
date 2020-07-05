@@ -53,6 +53,18 @@ I googled and found the PSR-2 style guide and will adapt the code to fit it: htt
 1. There are a few TODO comments in the code. Although that is considered bad practice, it is helpful sometimes to just
 move on without looking up the full idiomatic style.
 2. Accepting only gif, jpg (jpeg), png files as image files but that is easily extensible in the Validator class.
+3. During resizing, I preserve the aspect ratio. If width >= height, that is simple, but I calculate a suitable width
+otherwise based on the aspect ratio.
+4. In TDD practice, there are rules against side effects during tests, granularity of tests, etc. I have ignored a few
+of them in the interest of time spent. Many of these rules are subjective and require a judgement of intended use case
+of a project anyway.
+5. I started initially with the objective of supporting jpeg, png and gif images but I ran into difficulties in
+compiling (installing) the php-gd extension. Only --with-jpeg seemed to work. So, the image upload and resizing now
+works only for jpeg files.
+6. For image resizing there can more test cases. For example, we could have more sample images of sizes close to 800
+pixel width or height to see edge behaviour. I have kept that limit configurable within the Processor class so that
+lends some more complexity to which test cases may be valid. For the tests, to be repeatable, there needs to be a rename
+file mode, otherwise the original files are modified.
 
 
 

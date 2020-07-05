@@ -9,9 +9,7 @@ class NotRealImageException extends Exception {}
 class Validator {
     public static array $validImageFormats = array(
         1 => 'jpg',
-        2 => 'gif',
-        3 => 'png',
-        4 => 'jpeg',
+        2 => 'jpeg',
     );
 
     public static int $maxSize = 200000; // 2MB

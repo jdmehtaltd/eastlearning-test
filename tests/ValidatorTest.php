@@ -10,9 +10,7 @@ class ValidatorTest extends TestCase
         try
         {
             Validator::checkIfValidImageFormat('abc.jpg');
-            Validator::checkIfValidImageFormat('abc.gif');
             Validator::checkIfValidImageFormat('abc.jpeg');
-            Validator::checkIfValidImageFormat('abc.png');
         }
         catch(NotAllowedImageFormatException $ex)
         {
@@ -54,8 +52,6 @@ class ValidatorTest extends TestCase
         try
         {
             Validator::checkIfRealImage('/app/tests/JPEG_compression_Example.jpg', 'image/jpeg');
-            Validator::checkIfRealImage('/app/tests/Lomo-lca_sample_png.png', 'image/png');
-            Validator::checkIfRealImage('/app/tests/tenor_gif.gif', 'image/gif');
         }
         catch(NotRealImageException $ex)
         {

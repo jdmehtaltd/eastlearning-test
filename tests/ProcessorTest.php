@@ -15,18 +15,15 @@ class ProcessorTest extends TestCase
         }
 
         // file not to be resized
-        $oldFileName = '/app/tests/JPEG_compression_Example.jpg';
-        $newFileName = Processor::resizeIfNeeded($oldFileName);
-        $this->assertEquals($oldFileName, $newFileName);
+        $resized = Processor::resizeIfNeeded('/app/tests/small-image.jpg', true);
+        $this->assertFalse($resized);
 
         // wide image to be resized
-        $oldFileName = '/app/tests/wide-image.png';
-        $newFileName = Processor::resizeIfNeeded($oldFileName);
-        $this->assertEquals($oldFileName . '-resized', $newFileName);
+        $resized = Processor::resizeIfNeeded('/app/tests/wide-image.jpg', true);
+        $this->assertTrue($resized);
 
         // tall image to be resized
-        $oldFileName = '/app/tests/tall-image.png';
-        $newFileName = Processor::resizeIfNeeded($oldFileName);
-        $this->assertEquals($oldFileName . '-resized', $newFileName);
+        $resized = Processor::resizeIfNeeded('/app/tests/tall-image.jpg', true);
+        $this->assertTrue($resized);
     }
 }
