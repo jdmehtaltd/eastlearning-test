@@ -94,13 +94,13 @@ upload.
 2. I have based the hash on the filename to be uploaded. Which means if you upload the same file, it will be 
 overwritten. The filename is a simple way of judging if the same file has been uploaded.
 3. How to store lots of images:
-    a. With Cloud IaaS: This is a very convenient option, the most obvious being an S3 bucket. I am quite familiar with this
+    * With Cloud IaaS: This is a very convenient option, the most obvious being an S3 bucket. I am quite familiar with this
     use case and big data library like smart_open in Python makes S3 usage almost as simple as using a file system. We 
     could find something similar in PHP. https://github.com/RaRe-Technologies/smart_open. AWS also supports NFS
     in the cloud which could also work as central storage for more than one web app server. We have to be careful about
     concurrency, error handling, etc. For example, what happens if the NFS drive gets unmounted or disconnected from a web
     app server. S3 handles a lot of it for you, for example, an S3 upload is an all-or-nothing upload.
-    b. Without Cloud Iaas: There could be several options here. Let's assume we had a data centre in-house. You could
+    * Without Cloud Iaas: There could be several options here. Let's assume we had a data centre in-house. You could
     just use a file server as central server for serving files to many web app servers. NFS will perform OK, but it comes
     with some management overhead in addition to the programming issues mentioned above. A modern database can easily handle
     binary large objects (BLOBs) and it will give you full ACID transactions for uploads. I think it is a better option
