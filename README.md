@@ -83,6 +83,9 @@ but can be done by using technologies like selenium. There are plenty of paid to
 prominent ones being browserstack.
 14. I have not used docstrings because I don't remember much about PHP docstrings and with code that is being
 refactored quite often, it is better to leave them for later.
+15. Even though Validator will reject files > 2MB (configurable inside Validator), I have discovered that php.ini
+also controls this setting as per here: https://stackoverflow.com/questions/2184513/change-the-maximum-upload-file-size.
+I will have to change the docker configuration to make that part work.
 
 ## Bonus Mark questions
 
@@ -91,18 +94,18 @@ upload.
 2. I have based the hash on the filename to be uploaded. Which means if you upload the same file, it will be 
 overwritten. The filename is a simple way of judging if the same file has been uploaded.
 3. How to store lots of images:
-a. With Cloud IaaS: This is a very convenient option, the most obvious being an S3 bucket. I am quite familiar with this
-use case and big data library like smart_open in Python makes S3 usage almost as simple as using a file system. I am
-sure we could find something similar in PHP. https://github.com/RaRe-Technologies/smart_open. AWS also supports NFS
-in the cloud which could also work as central storage for more than one web app server. We have to be careful about
-concurrency, error handling, etc. For example, what happens if the NFS drive gets unmounted or disconnected from a web
-app server. S3 handles a lot of it for you, for example, an S3 upload is an all-or-nothing upload.
-b. Without Cloud Iaas: There could be several options here. Let's assume we had a data centre in-house. You could
-just use a file server as central server for serving files to many web app servers. NFS will perform OK, but it comes
-with some management overhead in addition to the programming issues mentioned above. A modern database can easily handle
-binary large objects (BLOBs) and it will give you full ACID transactions for uploads. I think it is a better option
-to run a database server than NFS for web apps. Managing a database server is a bit more onerous in terms of overhead as
-an NFS server but it is worth it for the extra reliability and simplicity in programming.
+    a. With Cloud IaaS: This is a very convenient option, the most obvious being an S3 bucket. I am quite familiar with this
+    use case and big data library like smart_open in Python makes S3 usage almost as simple as using a file system. We 
+    could find something similar in PHP. https://github.com/RaRe-Technologies/smart_open. AWS also supports NFS
+    in the cloud which could also work as central storage for more than one web app server. We have to be careful about
+    concurrency, error handling, etc. For example, what happens if the NFS drive gets unmounted or disconnected from a web
+    app server. S3 handles a lot of it for you, for example, an S3 upload is an all-or-nothing upload.
+    b. Without Cloud Iaas: There could be several options here. Let's assume we had a data centre in-house. You could
+    just use a file server as central server for serving files to many web app servers. NFS will perform OK, but it comes
+    with some management overhead in addition to the programming issues mentioned above. A modern database can easily handle
+    binary large objects (BLOBs) and it will give you full ACID transactions for uploads. I think it is a better option
+    to run a database server than NFS for web apps. Managing a database server is a bit more onerous in terms of overhead as
+    an NFS server but it is worth it for the extra reliability and simplicity in programming.
  
 
 
