@@ -73,13 +73,38 @@ through the web page.
 provide guidelines but emphasize that practical considerations may override guidelines.
 11. A very simple way of generating secure URLs is to use a hash of the base filename. That would also ensure that 
 re-uploads of the same file would result in an overwrite of the file, which you might have in mind. If you want to 
-prevent overwrites completely, then a simple scheme could be to suffix the iso8601 to the base filename before hashing. 
-At low volumes, that will approximate unique URLs because 2 uploads for the same filename are unlikely to collide 
-(especially if we separate the uploads by username) at a microsecond granularity. I have implemented such a scheme
-at the time of URL generation.
-12. We could use database, postgres or mysql to keep maps of users and filenames. That would not be that hard to add
-to the current docker setup. But at that point, we should start discussing frameworks, long term objectives of the
-project, etc.
+prevent overwrites completely, a simple scheme could be to suffix the iso8601 timestamp to the base filename before 
+hashing. At low volumes, that will approximate unique URLs because 2 uploads for the same filename are unlikely to collide 
+(especially if we separate the uploads by username) at a microsecond granularity. 
+12. We could use a database to keep maps of users and filenames. That would be fairly simple to the current docker 
+setup. A database would trigger discussions about frameworks, long term objectives, etc.
+13. There are some more sample images in tests/ to help test the upload page. Test automation for UIs is tricky, 
+but can be done by using technologies like selenium. There are plenty of paid tools for automating, one of the
+prominent ones being browserstack.
+14. I have not used docstrings because I don't remember much about PHP docstrings and with code that is being
+refactored quite often, it is better to leave them for later.
+
+## Bonus Mark questions
+
+1. For secure URLs, see notes on hashing above. I have implemented the first part, which overwrites the same file on
+upload.
+2. I have based the hash on the filename to be uploaded. Which means if you upload the same file, it will be 
+overwritten. The filename is a simple way of judging if the same file has been uploaded.
+3. How to store lots of images:
+a. With Cloud IaaS: This is a very convenient option, the most obvious being an S3 bucket. I am quite familiar with this
+use case and big data library like smart_open in Python makes S3 usage almost as simple as using a file system. I am
+sure we could find something similar in PHP. https://github.com/RaRe-Technologies/smart_open. AWS also supports NFS
+in the cloud which could also work as central storage for more than one web app server. We have to be careful about
+concurrency, error handling, etc. For example, what happens if the NFS drive gets unmounted or disconnected from a web
+app server. S3 handles a lot of it for you, for example, an S3 upload is an all-or-nothing upload.
+b. Without Cloud Iaas: There could be several options here. Let's assume we had a data centre in-house. You could
+just use a file server as central server for serving files to many web app servers. NFS will perform OK, but it comes
+with some management overhead in addition to the programming issues mentioned above. A modern database can easily handle
+binary large objects (BLOBs) and it will give you full ACID transactions for uploads. I think it is a better option
+to run a database server than NFS for web apps. Managing a database server is a bit more onerous in terms of overhead as
+an NFS server but it is worth it for the extra reliability and simplicity in programming.
+ 
+
 
 
 

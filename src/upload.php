@@ -10,20 +10,13 @@ $tmp_filename = $_FILES["fileToUpload"]["tmp_name"];
 $size = $_FILES["fileToUpload"]["size"];
 $mime_type_from_browser = $_FILES["fileToUpload"]["type"];
 // a very simple way of generating secure URLs is to use a hash of the base filename. That would also ensure that
-// re-uploads of the same file would result in an overwrite of the file, which you might have in mind.
-// If you want to prevent overwrites completely, then a simple scheme could be to suffix the iso8601 to the base
-// filename before hashing. At low volumes, that will approximate unique URLs because 2 uploads for the same filename
-// are unlikely to collide (especially if we separate the uploads by username) at a microsecond granularity.
-$target_filename = $base_filename . '-' . date('c');
-echo "Target filename is $target_filename<br/>";
-$target_hashed_filename = hash('ripemd160', $target_filename) . '.' . $file_extension;
+// re-uploads of the same file would result in an overwrite of the file.
+$target_hashed_filename = hash('ripemd160', $base_filename) . '.' . $file_extension;
 $upload_ok = true;
 
 // from the documentation here: https://www.php.net/manual/en/features.file-upload.post-method.php
-if ($size == 0){
-    echo 'No file was uploaded';
-    $upload_ok = false;
-}
+
+$size or exit('Could not obtain file size from browser, so no file was uploaded');
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
@@ -48,14 +41,15 @@ if(isset($_POST["submit"])) {
         $upload_ok = false;
     }
 
-    try {
-        Processor::resizeIfNeeded($tmp_filename);
-    } catch (GetImageSizeException $ex) {
-        echo $ex->getMessage() . '<br/>';
-        $upload_ok = false;
+    if ($upload_ok) {
+        try {
+            Processor::resizeIfNeeded($tmp_filename);
+        } catch (GetImageSizeException $ex) {
+            echo $ex->getMessage() . '<br/>';
+            $upload_ok = false;
+        }
     }
 
-    // Check if $uploadOk is set to 0 by an error
     if (!$upload_ok) {
         echo "Sorry, your file was not uploaded.<br/>";
         // if everything is ok, try to upload file
