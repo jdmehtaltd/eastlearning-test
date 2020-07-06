@@ -69,6 +69,18 @@ file mode, otherwise the original files are modified.
 8. The persistent URL for sharing is printed upon upload in this very simple journey flow.
 9. An image file is provided in tests/ which is larger than 2MB for testing the upload rejection of large files
 through the web page.
+10. The Processor class violates PSR-2 side effect rule. Should read PSR-2 in more detail. In Python, PEP8 and PEP257
+provide guidelines but emphasize that practical considerations may override guidelines.
+11. A very simple way of generating secure URLs is to use a hash of the base filename. That would also ensure that 
+re-uploads of the same file would result in an overwrite of the file, which you might have in mind. If you want to 
+prevent overwrites completely, then a simple scheme could be to suffix the iso8601 to the base filename before hashing. 
+At low volumes, that will approximate unique URLs because 2 uploads for the same filename are unlikely to collide 
+(especially if we separate the uploads by username) at a microsecond granularity. I have implemented such a scheme
+at the time of URL generation.
+12. We could use database, postgres or mysql to keep maps of users and filenames. That would not be that hard to add
+to the current docker setup. But at that point, we should start discussing frameworks, long term objectives of the
+project, etc.
+
 
 
 
