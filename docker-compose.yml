@@ -1,6 +1,6 @@
 version: '3.2'
 services:
-  php:
+  php-eastlearning:
     # need this for dev environments and proper debugging
     volumes:
       - type: bind

@@ -40,7 +40,7 @@ JetBrains now encourages by setting up a pre-configured `.gitignore` file inside
 TDD is pretty standard now with well documented benefits. My first task was to configure PHPUnit. I have read 
 that Pest may be a better option. For now, PHPUnit may be the easier option since it is more popular. The unit test
 run config works inside PHPStorm (through my shared `.idea/`). For command line, try this:
-`cd {project_root}; docker-compose exec php /vendor/phpunit/phpunit/phpunit /app/tests`.
+`cd {project_root}; docker-compose run php-eastlearning php /vendor/phpunit/phpunit/phpunit /app/tests`.
 
 The classes which do the Validator and Processor logic are in `src/Validator.php` and `src/Processor.php`. The script 
 which receives the POST for the upload is in `src/upload.php`.
